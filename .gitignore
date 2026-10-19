@@ -1,0 +1,19 @@
+# Виртуальное окружение
+venv/
+.venv/
+env/
+
+# База данных и секретные ключи
+data/
+*.db
+*.sqlite
+*.key
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Настройки редактора
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои заметки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="main-page">
+    <div class="app" id="app">
+        <header class="app-header">
+            <div class="header-left">
+                <img class="logo" src="img/logo3.png" alt="Логотип">
+                <div class="header-brand">Заметки.</div>
+            </div>
+            <div class="header-actions">
+                <span class="muted" id="userLabel"></span>
+                <button type="button" class="secondary" id="themeToggle">Тема</button>
+                <button type="button" class="secondary" id="trashBtn">Корзина</button>
+                <button type="button" class="secondary" id="logoutButton">Выйти</button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <div class="toolbar">
+                <button type="button" class="btn-add" id="addNoteBtn">+ Новая заметка</button>
+                <input type="search" class="search-input" id="searchInput" placeholder="Поиск заметок..." aria-label="Поиск заметок">
+            </div>
+
+            <div class="notes-flex" id="notesGrid"></div>
+        </main>
+    </div>
+
+    <div class="modal-overlay hidden" id="modalOverlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <h2 id="modalTitle">Новая заметка</h2>
+            <form id="noteForm">
+                <input type="text" id="noteTitle" placeholder="Заголовок" required>
+
+                <div class="format-toolbar">
+                    <button type="button" class="fmt-btn" data-cmd="bold" title="Жирный"><b>Ж</b></button>
+                    <button type="button" class="fmt-btn" data-cmd="italic" title="Курсив"><i>К</i></button>
+                    <button type="button" class="fmt-btn" data-cmd="underline" title="Подчёркнутый"><u>П</u></button>
+                    <button type="button" class="fmt-btn" data-cmd="undo" id="undoBtn" tabindex="-1" title="Отменить" aria-label="Отменить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg></button>
+                    <span class="fmt-divider"></span>
+                    <button type="button" class="fmt-btn" data-cmd="insertUnorderedList" title="Маркированный список">• Список</button>
+                    <button type="button" class="fmt-btn" data-cmd="insertOrderedList" title="Нумерованный список">1. Список</button>
+                </div>
+                <div id="noteContent" contenteditable="true" data-placeholder="Текст заметки..."></div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Отмена</button>
+                    <button type="submit" class="btn-save">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="trashOverlay">
+        <div class="modal" role="dialog" aria-modal="true">
+            <h2>Корзина</h2>
+            <div class="trash-list" id="trashList"></div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" id="closeTrashBtn">Закрыть</button>
+                <button type="button" class="btn-danger" id="clearTrashBtn">Очистить корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <span class="footer-company">ООО "ВиртуалПеро"</span>
+        <a href="tel:89934636363">8 993 463-63-63</a>
+        <a href="mailto:virtualpiero.buisness@gmail.com">virtualpiero.buisness@gmail.com</a>
+    </footer>
+
+    <script src="notes.js"></script>
+</body>
+</html>

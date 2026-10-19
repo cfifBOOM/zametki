@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация и авторизация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="zam-header">
+        <div class="header-left">
+            <img class="logo" src="img/logo3.png" alt="Логотип">
+            <div class="zam-brand">Заметки.</div>
+        </div>
+        <div class="zam-actions">
+            <button type="button" class="secondary" id="themeToggle">Тема</button>
+        </div>
+    </header>
+
+    <div class="auth-page">
+        <div class="auth-container">
+            <h1>Ваши заметки</h1>
+            <p class="subtitle">Войдите или создайте аккаунт</p>
+
+            <div class="tabs">
+                <button type="button" class="tab active" id="tabRegister">Регистрация</button>
+                <button type="button" class="tab" id="tabLogin">Вход</button>
+            </div>
+
+            <form id="registerForm">
+                <input type="text" id="registerName" placeholder="Имя" autocomplete="name" required>
+                <input type="email" id="registerEmail" placeholder="Email" autocomplete="email" required>
+                <input type="password" id="registerPassword" placeholder="Пароль (минимум 8 символов)" autocomplete="new-password" minlength="8" required>
+                <p class="muted">Минимум 8 символов: заглавная и строчная буквы, цифра и спецсимвол (! @ # $ % _ -).</p>
+                <button type="submit" class="primary">Зарегистрироваться</button>
+            </form>
+
+            <form id="loginForm" class="hidden">
+                <input type="email" id="loginEmail" placeholder="Email" autocomplete="email" required>
+                <input type="password" id="loginPassword" placeholder="Пароль" autocomplete="current-password" required>
+                <button type="submit" class="primary">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <span class="footer-company">ООО "ВиртуалПеро"</span>
+        <a href="tel:89934636363">8 993 463-63-63</a>
+        <a href="mailto:virtualpiero.buisness@gmail.com">virtualpiero.buisness@gmail.com</a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
