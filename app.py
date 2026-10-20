@@ -75,7 +75,7 @@ def init_db():
             content    TEXT NOT NULL,
             created_at INTEGER NOT NULL,
             updated_at INTEGER NOT NULL,
-            deleted_at INTEGER          -- пусто = обычная заметка, число = лежит в корзине
+            deleted_at INTEGER          
         );
     ''')
     db.commit()
