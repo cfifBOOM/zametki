@@ -19,7 +19,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 80px); 
+    min-height: calc(100vh - 80px);
     width: 100%;
 }
 
@@ -30,7 +30,6 @@ body {
     background: #ffffff;
     border-radius: 16px;
     color: #1d1d1f;
-    
 }
 
 .auth-container h1 {
@@ -130,7 +129,9 @@ body.main-page {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    /* overflow: hidden; */
 }
+
 .zam-header {
     display: flex;
     flex-direction: row;
@@ -141,6 +142,7 @@ body.main-page {
     width: 100%;
     padding: 20px 24px;
 }
+
 .head_zam {
     display: flex;
     flex-direction: row;
@@ -148,6 +150,7 @@ body.main-page {
     align-items: center;
     margin-bottom: 150px;
 }
+
 .zam-left {
     display: flex;
     align-items: center;
@@ -259,7 +262,7 @@ body.main-page {
     color: #1d1d1f;
 }
 
-/* сам заметки */
+/* сами заметки */
 .notes-flex {
     display: flex;
     flex-wrap: wrap;
@@ -317,7 +320,7 @@ body.main-page {
 .note-actions button {
     flex: 1;
     padding: 8px;
-    border: 1px solid #e5e5e7;
+    border: 2px solid #e5e5e7;
     border-radius: 8px;
     font-size: 13px;
     color: #1d1d1f;
@@ -325,9 +328,19 @@ body.main-page {
     background: #ffffff;
 }
 
+.note-actions .btn-change {
+    color: rgb(10, 105, 10);
+    
+}
+
 .note-actions .btn-change:hover {
     background: rgb(10, 105, 10);
     color: #ffffff;
+}
+
+.note-actions .btn-delete {
+    color: #cc2920;
+    
 }
 
 .note-actions .btn-delete:hover {
@@ -405,6 +418,11 @@ body.main-page {
     background: #e5e5e7;
 }
 
+.fmt-btn.active {
+    background: rgb(10, 105, 10);
+    color: #ffffff;
+}
+
 .fmt-divider {
     width: 1px;
     height: 24px;
@@ -470,7 +488,7 @@ body.main-page {
     color: #1d1d1f;
 }
 
-.btn-cancel:hover{
+.btn-cancel:hover {
     background: #d6d6d6;
     color: #000;
 }
@@ -489,12 +507,12 @@ body.main-page {
     color: #ffffff;
 }
 
-.btn-danger:hover{
+.btn-danger:hover {
     background: #292626;
     color: #fff;
 }
 
-/* корзина  */
+/* корзина */
 .trash-list {
     max-height: 400px;
     overflow-y: auto;
@@ -508,6 +526,7 @@ body.main-page {
     border-radius: 10px;
     padding: 16px;
     border: 1px solid #e5e5e7;
+    overflow: hidden;
 }
 
 .trash-item h4 {
@@ -523,6 +542,17 @@ body.main-page {
     color: #86868b;
     line-height: 1.4;
     margin-bottom: 4px;
+    max-height: 90px;
+    overflow: hidden;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.trash-item .trash-content * {
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .trash-item .trash-content ul,
@@ -551,25 +581,37 @@ body.main-page {
     cursor: pointer;
 }
 
-.btn-restore {
-    background: #fff;
+.trash-item-actions .btn-restore {
+    background: #e3e3e6;
     color: rgb(10, 105, 10);
+    border: 1px solid #d2d2d7;
 }
 
-.btn-restore:hover {
+.trash-item-actions .btn-restore:hover {
     background: rgb(10, 105, 10);
     color: #fff;
+    border-color: rgb(10, 105, 10);
 }
 
-.btn-forever {
-    background: #ffffff;
+.trash-item-actions .btn-forever {
+    background: #e3e3e6;
     color: #cc2920;
-    border: 1px solid #ff3b30;
+    border: 1px solid #d2d2d7;
 }
 
-.btn-forever:hover {
+.trash-item-actions .btn-forever:hover {
     background: #cc2920;
     color: #ffffff;
+    border-color: #cc2920;
+}
+
+#trashOverlay .modal-actions .btn-cancel {
+    background: #e3e3e6;
+    color: #1d1d1f;
+}
+
+#trashOverlay .modal-actions .btn-cancel:hover {
+    background: #d2d2d7;
 }
 
 .trash-empty {
@@ -667,12 +709,22 @@ body.dark-theme .note-actions button {
     border-color: #333336;
 }
 
+body.dark-theme .note-actions .btn-change {
+    color: #4a9d4a;
+}
+
 body.dark-theme .note-actions .btn-change:hover {
     background: #4a9d4a;
+    color: #ffffff;
+}
+
+body.dark-theme .note-actions .btn-delete {
+    color: #ff6b6b;
 }
 
 body.dark-theme .note-actions .btn-delete:hover {
     background: #cc2920;
+    color: #ffffff;
 }
 
 body.dark-theme .empty-state {
@@ -703,6 +755,11 @@ body.dark-theme .fmt-btn:hover {
 
 body.dark-theme .fmt-btn:active {
     background: #3a3a3a;
+}
+
+body.dark-theme .fmt-btn.active {
+    background: #4a9d4a;
+    color: #ffffff;
 }
 
 body.dark-theme .fmt-divider {
@@ -750,25 +807,37 @@ body.dark-theme .trash-empty {
     color: #a1a1a6;
 }
 
-body.dark-theme .btn-restore {
-    background: #1e1e1e;
+body.dark-theme .trash-item-actions .btn-restore {
+    background: #353535;
     color: #4a9d4a;
+    border-color: #454545;
 }
 
-body.dark-theme .btn-restore:hover{
+body.dark-theme .trash-item-actions .btn-restore:hover {
     background: #4a9d4a;
     color: #fff;
+    border-color: #4a9d4a;
 }
 
-body.dark-theme .btn-forever {
-    background: #1e1e1e;
+body.dark-theme .trash-item-actions .btn-forever {
+    background: #353535;
     color: #ff6b6b;
+    border-color: #454545;
+}
+
+body.dark-theme .trash-item-actions .btn-forever:hover {
+    background: #ff6b6b;
+    color: #fff;
     border-color: #ff6b6b;
 }
 
-body.dark-theme .btn-forever:hover{
-    background: #ff6b6b;
-    color: #fff;
+body.dark-theme #trashOverlay .modal-actions .btn-cancel {
+    background: #353535;
+    color: #f5f5f7;
+}
+
+body.dark-theme #trashOverlay .modal-actions .btn-cancel:hover {
+    background: #454545;
 }
 
 .fmt-btn svg {
@@ -786,7 +855,9 @@ body.dark-theme .btn-forever:hover{
     stroke: #333;
 }
 
-    
+.fmt-btn.active svg {
+    stroke: #ffffff;
+}
 
 /* футер */
 :root {
@@ -848,26 +919,91 @@ body.dark-theme .site-footer a:hover {
     color: #4a9d4a;
 }
 
-button.primary { cursor: pointer; }
-button.primary:hover { background: rgb(6, 66, 6); }
-
-.note-card .note-content { overflow: hidden; }
-
-.modal { max-height: 90vh; overflow-y: auto; }
-
-.format-toolbar { flex-wrap: wrap; }
-.fmt-btn svg { width: 16px; height: 16px; }
-.fmt-btn:active svg { stroke: currentColor; }
-
-.auth-page { min-height: calc(100vh - 160px); }
-body:not(.main-page) { padding-bottom: var(--footer-h); }
-@media (max-width: 600px) {
-    body:not(.main-page) { padding-bottom: 0; }
+button.primary {
+    cursor: pointer;
 }
 
-body.dark-theme .zam-brand { color: #f5f5f7; }
-body.dark-theme .modal-actions .btn-cancel:hover { background: #3a3a3a; color: #fff; }
-body.dark-theme input::placeholder { color: #8e8e93; }
+button.primary:hover {
+    background: rgb(6, 66, 6);
+}
+
+.note-card .note-content {
+    overflow: hidden;
+}
+
+.modal {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.format-toolbar {
+    flex-wrap: wrap;
+}
+
+.fmt-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.fmt-btn:active svg {
+    stroke: currentColor;
+}
+
+.auth-page {
+    min-height: calc(100vh - 160px);
+}
+
+body:not(.main-page) {
+    padding-bottom: var(--footer-h);
+}
+
+/* хедер как футер по цвету */
+.zam-header,
+.zam-header,
+.app-header {
+    position: relative;
+    z-index: 10;
+}
+
+.zam-header::before,
+.app-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e7;
+    z-index: -1;
+    pointer-events: none;
+}
+
+body.dark-theme .zam-header::before,
+body.dark-theme .app-header::before {
+    background: #1e1e1e;
+    border-bottom-color: #333336;
+}
+
+@media (max-width: 600px) {
+    body:not(.main-page) {
+        padding-bottom: 0;
+    }
+}
+
+body.dark-theme .zam-brand {
+    color: #f5f5f7;
+}
+
+body.dark-theme .modal-actions .btn-cancel:hover {
+    background: #3a3a3a;
+    color: #fff;
+}
+
+body.dark-theme input::placeholder {
+    color: #8e8e93;
+}
 
 @media (max-width: 600px) {
     .site-footer {
@@ -879,9 +1015,15 @@ body.dark-theme input::placeholder { color: #8e8e93; }
     body.main-page .app {
         padding-bottom: 0;
     }
+
+    .app-header {
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
     body {
         padding: 10px;
     }
@@ -904,7 +1046,6 @@ body.dark-theme input::placeholder { color: #8e8e93; }
     .header-actions button {
         margin: 5px 0;
     }
-
 
     .toolbar {
         flex-direction: column;
@@ -943,20 +1084,20 @@ body.dark-theme input::placeholder { color: #8e8e93; }
 
 @media screen and (max-width: 480px) {
     .format-toolbar {
-        flex-direction: row;     
-        flex-wrap: wrap;     
-        justify-content: center; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
         padding: 8px 0;
     }
 
     .fmt-btn {
-        min-width: 44px;      
+        min-width: 44px;
         padding: 8px 6px;
         font-size: 13px;
     }
 
     .fmt-divider {
-        height: 28px;         
+        height: 28px;
         margin: 0 6px;
     }
 
