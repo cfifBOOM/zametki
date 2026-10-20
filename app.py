@@ -14,11 +14,9 @@ DATA_DIR = os.path.join(BASE_DIR, 'data')
 DB_PATH = os.path.join(DATA_DIR, 'notes.db')
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# файлы сайта лежат в папке static и отдаются прямо из корня (/style.css, /main.html ...)
 app = Flask(__name__, static_folder='static', static_url_path='')
 
 
-# секретный ключ нужен, чтобы подписывать cookie с сессией
 def get_secret_key():
     if os.environ.get('SECRET_KEY'):
         return os.environ['SECRET_KEY']
@@ -32,20 +30,18 @@ def get_secret_key():
 
 app.config.update(
     SECRET_KEY=get_secret_key(),
-    SESSION_COOKIE_HTTPONLY=True,       # JS не видит cookie
-    SESSION_COOKIE_SAMESITE='Lax',      # cookie не уходит с чужих сайтов
-    SESSION_COOKIE_SECURE=os.environ.get('HTTPS') == '1',  # на хостинге с https поставьте HTTPS=1
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
+    SESSION_COOKIE_SECURE=os.environ.get('HTTPS') == '1',
     PERMANENT_SESSION_LIFETIME=timedelta(days=7),
-    MAX_CONTENT_LENGTH=300 * 1024,      # ограничение размера запроса
+    MAX_CONTENT_LENGTH=300 * 1024,
 )
 
 MAX_TITLE = 200
 MAX_CONTENT = 100000
-# разрешены только обычные теги (как и в notes.js)
 ALLOWED_TAGS = {'b', 'strong', 'i', 'em', 'u', 'ul', 'ol', 'li', 'br', 'div', 'p', 'span'}
 
 
-# база данных
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(DB_PATH)
@@ -89,7 +85,6 @@ def init_db():
 init_db()
 
 
-# вспомогательное
 def now_ms():
     return int(time.time() * 1000)
 
@@ -123,8 +118,6 @@ def login_required(view):
     return wrapper
 
 
-# защита от CSRF: изменяющие запросы принимаем только как JSON.
-# чужой сайт не может отправить такой запрос из браузера без нашего разрешения
 @app.before_request
 def only_json():
     if request.path.startswith('/api/') and request.method in ('POST', 'PUT', 'DELETE'):
@@ -132,7 +125,6 @@ def only_json():
             return error('Нужен JSON-запрос', 415)
 
 
-# проверка пароля
 def check_password_rules(password):
     if len(password) < 8:
         return 'Ваш пароль должен содержать минимум 8 символов!'
@@ -153,7 +145,6 @@ def check_password_rules(password):
     return None
 
 
-# проверка заметки
 def clean_html(html):
     return nh3.clean(str(html or ''), tags=ALLOWED_TAGS, attributes={}).strip()
 
@@ -177,7 +168,6 @@ def validate_note(data):
     return title, content, None
 
 
-# страницы
 @app.get('/')
 def index():
     if 'user_id' in session:
@@ -185,7 +175,6 @@ def index():
     return redirect('/index.html')
 
 
-# авторизация
 @app.post('/api/register')
 def register():
     data = get_json()
@@ -212,7 +201,6 @@ def register():
     except sqlite3.IntegrityError:
         return error('Пользователь с таким email уже существует.', 409)
 
-    # Сразу авторизуем пользователя после регистрации
     session.clear()
     session['user_id'] = cur.lastrowid
     session.permanent = True
@@ -252,7 +240,6 @@ def me():
     return jsonify({'user': {'name': user['name'], 'email': user['email']}})
 
 
-# заметки
 @app.get('/api/notes')
 @login_required
 def get_notes():
@@ -302,7 +289,6 @@ def update_note(note_id):
     return jsonify({'note': note_to_dict(row)})
 
 
-# удалить = положить в корзину (в базе остаётся, ставим время удаления)
 @app.delete('/api/notes/<int:note_id>')
 @login_required
 def delete_note(note_id):
@@ -317,7 +303,6 @@ def delete_note(note_id):
     return jsonify({'ok': True})
 
 
-# корзина
 @app.get('/api/trash')
 @login_required
 def get_trash():
@@ -371,5 +356,4 @@ def too_large(e):
 
 
 if __name__ == '__main__':
-    # для разработки; на хостинге запускается через gunicorn app:app
     app.run(debug=True)
